@@ -1,0 +1,36 @@
+﻿@model CustomerUsageOverviewViewModel
+
+@{
+    ViewData["Title"] = "Customer Usage Overview - " + Model.CurrentMonth;
+}
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h1 class="card-title">@ViewData["Title"]</h1>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Customer ID</th>
+                            <th>Full Name</th>
+                            <th>Total Data Used (GB)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Customers)
+                        {
+                            <tr>
+                                <td>@item.CustomerId</td>
+                                <td>@item.FullName</td>
+                                <td>@item.TotalDataUsed</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
