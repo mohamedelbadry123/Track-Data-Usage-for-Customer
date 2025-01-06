@@ -3,21 +3,27 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35431.28
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyApp.Web", "MyApp.Web\MyApp.Web.csproj", "{96EC4554-1DEF-45E1-9D3A-5CB4DBDCB60D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyApp.Web", "MyApp.Web\MyApp.Web.csproj", "{96EC4554-1DEF-45E1-9D3A-5CB4DBDCB60D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyApp.Domain", "MyApp.Domain\MyApp.Domain.csproj", "{8356E4FB-1635-4506-B361-1ABA8BFBF92A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyApp.Domain", "MyApp.Domain\MyApp.Domain.csproj", "{8356E4FB-1635-4506-B361-1ABA8BFBF92A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyApp.Data", "MyApp.Data\MyApp.Data.csproj", "{47AE11DE-6480-4FD1-9BAD-F31CA41E9975}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyApp.Data", "MyApp.Data\MyApp.Data.csproj", "{47AE11DE-6480-4FD1-9BAD-F31CA41E9975}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyApp.Services", "MyApp.Services\MyApp.Services.csproj", "{C0495EA3-A9DA-4CA1-9433-21EB414F9BAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyApp.Services", "MyApp.Services\MyApp.Services.csproj", "{C0495EA3-A9DA-4CA1-9433-21EB414F9BAB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyApp.Common", "MyApp.Common\MyApp.Common.csproj", "{B3E4DB0A-712B-40F1-9E0D-C79C1536C3C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyApp.Common", "MyApp.Common\MyApp.Common.csproj", "{B3E4DB0A-712B-40F1-9E0D-C79C1536C3C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyApp.Domain.Tests", "MyApp.Domain.Tests\MyApp.Domain.Tests.csproj", "{09297CA0-9F75-4138-A110-1FCB31038C16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyApp.Domain.Tests", "MyApp.Domain.Tests\MyApp.Domain.Tests.csproj", "{09297CA0-9F75-4138-A110-1FCB31038C16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyApp.Services.Tests", "MyApp.Services.Tests\MyApp.Services.Tests.csproj", "{6399989C-5CB6-4720-8E16-64308E2D6DB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyApp.Services.Tests", "MyApp.Services.Tests\MyApp.Services.Tests.csproj", "{6399989C-5CB6-4720-8E16-64308E2D6DB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyApp.Web.Tests", "MyApp.Web.Tests\MyApp.Web.Tests.csproj", "{244AD72C-4600-46D1-A94A-784DE0944DB5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyApp.Web.Tests", "MyApp.Web.Tests\MyApp.Web.Tests.csproj", "{244AD72C-4600-46D1-A94A-784DE0944DB5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4C22917A-18A4-443A-89CA-40F9E4AB943D}"
+	ProjectSection(SolutionItems) = preProject
+		Algorithm.txt = Algorithm.txt
+		C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\Backup\TelecomDataTracker = C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\Backup\TelecomDataTracker
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -9,6 +9,6 @@ namespace MyApp.Services.ServiceInterfaces
 {
     public interface IDataUsageService
     {
-        Task<CustomerUsageDTO?> GetMonthlyDataUsageAsync(int customerId, int month, int year);
+        CustomerUsageDTO? GetMonthlyDataUsageAsync(int customerId, int month, int year);
     }
 }

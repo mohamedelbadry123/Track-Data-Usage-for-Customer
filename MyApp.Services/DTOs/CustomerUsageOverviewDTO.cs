@@ -23,6 +23,16 @@ namespace MyApp.Services.DTOs
         public required string FullName { get; set; }
 
         /// <summary>
+        /// Gets or sets the plan name of the customer.
+        /// </summary>
+        public required string PlanName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the plan limit of the customer.
+        /// </summary>
+        public required decimal PlanLimit { get; set; }
+
+        /// <summary>
         /// Gets or sets the total data used by the customer in the current month, measured in gigabytes (GB).
         /// </summary>
         public decimal TotalDataUsed { get; set; }

@@ -16,6 +16,8 @@
                         <tr>
                             <th>Customer ID</th>
                             <th>Full Name</th>
+                            <th>Plan Name</th>
+                            <th>Plan Limit (GB)</th>
                             <th>Total Data Used (GB)</th>
                         </tr>
                     </thead>
@@ -23,9 +25,31 @@
                         @foreach (var item in Model.Customers)
                         {
                             <tr>
-                                <td>@item.CustomerId</td>
-                                <td>@item.FullName</td>
-                                <td>@item.TotalDataUsed</td>
+                                <td>
+                                    <a href="@Url.Action("Index", "DataUsage", new { customerId = item.CustomerId })" class="link-dark">
+                                        @item.CustomerId
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Index", "DataUsage", new { customerId = item.CustomerId })" class="link-dark">
+                                        @item.FullName
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Index", "DataUsage", new { customerId = item.CustomerId })" class="link-dark">
+                                        @item.PlanName
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Index", "DataUsage", new { customerId = item.CustomerId })" class="link-dark">
+                                        @item.PlanLimit
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Index", "DataUsage", new { customerId = item.CustomerId })" class="link-dark">
+                                        @item.TotalDataUsed
+                                    </a>
+                                </td>
                             </tr>
                         }
                     </tbody>

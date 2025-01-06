@@ -30,6 +30,7 @@ namespace MyApp.Data
             return (IGenericRepository<T>)_repositories[type];
         }
 
+
         public async Task<int> SaveChangesAsync()
         {
             return await _context.SaveChangesAsync();

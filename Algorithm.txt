@@ -1,0 +1,42 @@
+Algorithm: Aggregate and Analyze Customer Data Usage
+
+1. Initialize:
+   - customerUsage = empty dictionary
+   - alerts = empty list
+
+2. Fetch daily data records for all customers:
+   For each record in daily data records:
+     - customerId = record.customerId
+     - dailyUsage = record.dataUsage
+
+     If customerId not in customerUsage:
+       - Initialize customerUsage[customerId] = 0
+
+     - Add dailyUsage to customerUsage[customerId]
+
+3. Aggregate data by customer for total monthly usage:
+   For each customerId in customerUsage:
+     - monthlyUsage = customerUsage[customerId]
+     - planLimit = getPlanLimit(customerId)
+     - percentUsed = (monthlyUsage / planLimit) * 100
+
+     - Check for threshold alerts:
+       If percentUsed >= 90:
+         - alertMessage = "Customer " + customerId + " is at " + percentUsed + "% of data plan limit."
+         - Add alertMessage to alerts
+
+4. Display Page 1: Summary of all customers
+   - For each customerId in customerUsage:
+     - Display customerId, customerUsage[customerId], and planLimit
+
+5. Display Page 2: Detailed insights for each customer
+   - For each customerId in customerUsage:
+     - detailedUsage = getDetailedUsage(customerId)
+     - planRecommendation = getPlanRecommendation(customerId)
+     - Display customerId, detailedUsage, planRecommendation
+
+6. Process alerts:
+   - For each alert in alerts:
+     - Display alert
+
+7. End

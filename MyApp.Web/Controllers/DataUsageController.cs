@@ -23,13 +23,13 @@ namespace MyApp.Web.Controllers
         public async Task<IActionResult> Index(int customerId)
         {
             // Get current month
-            var month = DateTime.Now.Month;
+            var month = 12;
 
             // Get current month
-            var year = DateTime.Now.Year;
+            var year = 2024;
 
             // Retrieve monthly data usage from the service layer
-            var usageData = await _dataUsageService.GetMonthlyDataUsageAsync(customerId, month, year);
+            var usageData = _dataUsageService.GetMonthlyDataUsageAsync(customerId, month, year);
 
             // Check if usage data is available, otherwise return an error view
             if (usageData == null)
@@ -44,7 +44,7 @@ namespace MyApp.Web.Controllers
                 FullName = usageData.FullName,
                 TotalDataUsed = usageData.TotalDataUsed,
                 DataLimit = usageData.DataLimit,
-                IsNearLimit = (usageData.TotalDataUsed / usageData.DataLimit) > 0.9m, // Check if the usage is near the limit (e.g., above 90%)
+                IsNearLimit = (usageData.TotalDataUsed / usageData.DataLimit) > 0.7m, // Check if the usage is near the limit (e.g., above 90%)
                 RecommendedPlan = (usageData.TotalDataUsed / usageData.DataLimit) > 1 ? "Premium Data Plan" : "Standard Plan" // Suggest a plan based on usage
             };
 

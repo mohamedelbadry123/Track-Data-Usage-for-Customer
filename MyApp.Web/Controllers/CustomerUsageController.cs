@@ -25,11 +25,12 @@ namespace MyApp.Web.Controllers
             // Call the service to get an overview of customer usage
             var usageOverview = await _customerUsageService.GetCustomerUsageOverviewAsync();
 
+            var currentMonth = new DateTime(2024, 12, 01);
             // Prepare the view model with the data obtained from the service
             var viewModel = new CustomerUsageOverviewViewModel
             {
                 Customers = usageOverview,
-                CurrentMonth = DateTime.Now.ToString("MMMM yyyy") // Formatting current date to "Month Year" format
+                CurrentMonth = currentMonth.ToString("MMMM yyyy") // Formatting current date to "Month Year" format
             };
 
             // Return the view with the populated view model

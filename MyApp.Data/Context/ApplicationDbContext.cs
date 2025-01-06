@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using MyApp.Domain.Entities;
 using MyApp.Domain.Entities.Configuration;
@@ -69,6 +70,28 @@ namespace MyApp.Data.Context
             : base(options)
         {
             // Constructor ensures that the DbContext is initialized with the given options (e.g., connection string).
+        }
+
+        public void ExecuteStoredProcedure(int param1, int param2, int param3, out string firstName, out string lastName, out string totalDataUsage)
+        {
+            // Initialize output parameters
+            var output1 = new SqlParameter("@FirstName", System.Data.SqlDbType.Int) { Direction = System.Data.ParameterDirection.Output };
+            var output2 = new SqlParameter("@LastName", System.Data.SqlDbType.Int) { Direction = System.Data.ParameterDirection.Output };
+            var output3 = new SqlParameter("@TotalDataUsage", System.Data.SqlDbType.Int) { Direction = System.Data.ParameterDirection.Output };
+
+            // Input parameters
+            var input1 = new SqlParameter("@Param1", param1);
+            var input2 = new SqlParameter("@Param2", param2);
+            var input3 = new SqlParameter("@Param3", param3);
+
+            // Execute the stored procedure
+            this.Database.ExecuteSqlRaw("EXEC GetThreeValues @Param1, @Param2, @Param3, @FirstName OUTPUT, @LastName OUTPUT, @TotalDataUsage OUTPUT",
+                                        input1, input2, input3, output1, output2, output3);
+
+            // Assign output parameters to variables
+            firstName = (string)output1.Value;
+            lastName = (string)output2.Value;
+            totalDataUsage = (string)output3.Value;
         }
     }
 }

@@ -1,8 +1,10 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using MyApp.Data;
+using MyApp.Domain.Entities;
 using MyApp.Services.DTOs;
 using MyApp.Services.ServiceInterfaces;
+using System.Data;
 
 namespace MyApp.Services.ServiceImplementations
 {
@@ -24,39 +26,37 @@ namespace MyApp.Services.ServiceImplementations
         /// <returns>
         /// A <see cref="CustomerUsageDTO"/> object containing the data usage details if found, otherwise null.
         /// </returns>
-        public async Task<CustomerUsageDTO?> GetMonthlyDataUsageAsync(int customerId, int month, int year)
+        public CustomerUsageDTO? GetMonthlyDataUsageAsync(int customerId, int month, int year)
         {
-            // Define parameters to be passed to the stored procedure
-            var parameters = new[]
+            var usageRecords = _unitOfWork.Repository<MyApp.Domain.Entities.UsageRecords>().GetAllAsync();
+
+            var customerUsageRecords = usageRecords.Where(c => c.CustomerID == customerId)
+                    .Include(c=> c.Customer)
+                        .ThenInclude(c=> c.CustomerPlan)
+                            .ThenInclude(c=> c.Plan)
+                    .ToList();
+
+            if(customerUsageRecords != null && customerUsageRecords.Count() > 0)
             {
-                new SqlParameter("@CustomerId", customerId),
-                new SqlParameter("@Month", month),
-                new SqlParameter("@Year", year)
-            };
+                var customerUsageRecord = customerUsageRecords
+                       .Where(u => u.Date.Month == month && u.Date.Year == year) // Filter records to current month and year
+                       .GroupBy(u => u.CustomerID) // Group by CustomerID to aggregate data per customer
+                       .Select(group => new CustomerUsageDTO
+                       {
+                           CustomerId = group.Key, // Set CustomerId from the group key
+                           FullName = group.First().Customer.FirstName + " " + group.First().Customer.LastName, // Concatenate first and last name from the first record in the group
+                           TotalDataUsed = group.Sum(u => u.DataUsed),
+                           DataLimit = group.First().Customer.CustomerPlan.Plan.DataLimit// Sum up the data used for each group to get total data usage,
+                       })
+                       .FirstOrDefault(); // Execute the query asynchronously and convert the result to a List
 
-            // Construct the SQL query to execute the stored procedure
-            var query = "EXEC dbo.GetMonthlyDataUsage @CustomerId, @Month, @Year";
-
-            // Execute the query and obtain the first or default record asynchronously
-            var usageRecord = await _unitOfWork.Context.Database
-                                  .SqlQueryRaw<CustomerUsageDTO>(query, parameters)
-                                  .FirstOrDefaultAsync();
-
-            // Check if a usage record was found
-            if (usageRecord != null)
-            {
-                // Map the data to a new CustomerUsageDTO object
-                return new CustomerUsageDTO
+                if(customerUsageRecord != null)
                 {
-                    CustomerId = usageRecord.CustomerId,
-                    FullName = $"{usageRecord.FullName}",
-                    TotalDataUsed = usageRecord.TotalDataUsed,
-                    DataLimit = usageRecord.DataLimit
-                };
+                    return customerUsageRecord;
+                }
             }
 
-            // Return null if no record was found to indicate the absence of data
-            return null; // Consider enhancing this to handle a "not found" situation more gracefully
+            return null;
         }
 
     }
